@@ -1,1 +1,8 @@
-"# robotica-garra"  git init git add README.md git commit -m "first commit" git remote add origin https://github.com/viniciuslln/robotica-garra.git git push -u origin master
+# robotica-garra
+Testado em:
+ - Windows 10 - 64bit
+ - Visual Studio 2017
+ 
+# Biblioteca usada
+ - https://32feet.codeplex.com
+
