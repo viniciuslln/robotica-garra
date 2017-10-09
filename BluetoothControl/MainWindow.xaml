@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BluetoothControl.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Bluetooth Control" 
+        Title="Bluetooth Control"  SizeToContent="WidthAndHeight"
         Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,27 +19,34 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="10" Text="Status:" VerticalAlignment="Center" 
                        Grid.Row="0" Grid.Column="0"></TextBlock>
             <TextBlock x:Name="lblStatus" Text="No Device" Width="200" VerticalAlignment="Center" 
                        HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"></TextBlock>
-            <Button Content="Search device" x:Name="btnSearchDevice" Grid.Row="0" Grid.Column="2" 
+            <Button Content="Procurar dispositivo" x:Name="btnSearchDevice" Grid.Row="0" Grid.Column="2" 
                     HorizontalAlignment="Left" VerticalAlignment="Center" Padding="5" Margin="5" 
                     Click="btnSearchDevice_Click"></Button>
             <TextBlock Margin="10" Text="Message:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></TextBlock>
             <TextBox x:Name="txtMessage" Margin="0 0 0 0" Width="200" 
                      VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"></TextBox>
-            <Button Content="Send message" x:Name="btnSendMessage" VerticalAlignment="Center" 
+            <Button Content="Enviar mensagem" x:Name="btnSendMessage" VerticalAlignment="Center" 
                     Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="5" Padding="5" 
                     IsEnabled="False" Click="btnSendMessage_Click"></Button>
+
+            <Button Content="Abrir" VerticalAlignment="Center" Click="clickSequenciaCarregar"
+                    Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" Margin="5" Padding="5" />
+            <Button Content="Salvar" VerticalAlignment="Center" Click="clickSequenciaSalvar"
+                    Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" Margin="5" Padding="5" />
         </Grid>
         <Grid Grid.Row="3">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <ScrollViewer Margin="16" Grid.Column="0"
@@ -93,22 +100,38 @@
 
                             <StackPanel Orientation="Horizontal" Margin="0 16">
                                 <Label Content="Velocidade:" Margin="0 0 10 0"/>
-                                <RadioButton GroupName="RradioGroupVelocidade" Content="Lento"  Margin="0 0 10 0" VerticalAlignment="Center"/>
-                                <RadioButton GroupName="RradioGroupVelocidade" Content="Normal"  Margin="0 0 10 0" VerticalAlignment="Center"/>
-                                <RadioButton GroupName="RradioGroupVelocidade" Content="Rápido"  Margin="0 0 10 0" VerticalAlignment="Center"/>
+                                <RadioButton x:Name="RadioLento" GroupName="RradioGroupVelocidade" Content="Lento"  Margin="0 0 10 0" VerticalAlignment="Center" IsChecked="True"/>
+                                <RadioButton x:Name="RadioNormal" GroupName="RradioGroupVelocidade" Content="Normal"  Margin="0 0 10 0" VerticalAlignment="Center"/>
+                                <RadioButton x:Name="RadioRapido" GroupName="RradioGroupVelocidade" Content="Rápido"  Margin="0 0 10 0" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <Button Content="Gravar Posição"  />
-                            <Button Content="Executar Sequência"/>
-                            <Button Content="Gravar Sequência"/>
-                            <Button Content="Parar"/>
-                            <Button Content="Mover"/>
+                            <Button Content="Mover" Click="Button_Click_Mover"/>
+                            <Button Content="Gravar Posição" Click="Button_Click_Gravar_Posicao" />
+                            <Button Content="Executar Sequência" Click="Button_Click_Executar_Sequencia"/>
+                            <!--<Button Content="Parar"/>-->
                         </StackPanel>
 
                     </StackPanel>
 
                 </ScrollViewer>
 
-                <ListView Grid.Column="1" Margin="16"  />
+                <Grid  Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Nova Sequencia" Grid.Row="0" Margin="16 16 16 0" Click="Button_Click_Nova_Sequencia"/>
+                    <ListView x:Name="ListaSequencia" Margin="16" Grid.Row="1" 
+                              SelectionMode="Single" SelectionChanged="ListaSequencia_Selected"/>
+                </Grid>
+                <Grid  Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Apagar selecionada" Grid.Row="0" Margin="16 16 16 0" Click="Button_Click_Apagar_Sequencia"/>
+                    <ListView x:Name="ListaItemsSequencia" Margin="16"  Grid.Row="1"
+                              SelectionMode="Single" SelectionChanged="ListaItemsSequencia_SelectionChanged"/>
+                </Grid>
 
             </Grid>
         </Grid>
