@@ -10,7 +10,7 @@ namespace BluetoothControl {
             public string FormatarSequencia( ) {
                 string sequencia = "";
                 foreach( var item in this.numeros ) {
-                    sequencia += (char) item;
+                    sequencia += item != 0 ? (char) item : '0';
                 }
                 sequencia += velocidade;
                 return sequencia;

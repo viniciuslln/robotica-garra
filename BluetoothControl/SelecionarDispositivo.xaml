@@ -1,0 +1,27 @@
+﻿<Window x:Class="BluetoothControl.SelecionarDispositivo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BluetoothControl"
+        mc:Ignorable="d"
+        Title="SelecionarDispositivo" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" x:Name="ListaDispositivos">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Margin="4">
+                        <TextBlock Text="{Binding DeviceName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding DeviceAddress}"/>
+                    </StackPanel>                        
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Content="Selecionar" HorizontalAlignment="Right" Margin="8" Padding="8" Click="Button_Click"/>
+        <Label Content="Procurando..." x:Name="LabelProcurando" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
+    </Grid>
+</Window>

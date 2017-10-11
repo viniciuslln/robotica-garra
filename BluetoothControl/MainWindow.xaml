@@ -62,37 +62,50 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label  Content="Garra" Grid.Column="0" Grid.Row="0"/>
-                            <Slider x:Name="SliderGarra" Value="{Binding ElementName=TextBoxGarra, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="10" Maximum="100" Grid.Row="0" Height="22" VerticalAlignment="Top"/>
+                            <Label HorizontalAlignment="Center" Content="Menbro" Grid.Row="0" Grid.Column="0"/>
+                            <Label HorizontalAlignment="Center" Content="Controle" Grid.Row="0" Grid.Column="1"/>
+                            <Label HorizontalAlignment="Center" Content="Valor" Grid.Row="0" Grid.Column="2"/>
+                            <Label HorizontalAlignment="Center" Content="Não mover" Grid.Row="0" Grid.Column="3"/>
+                            
+                            <Label  Content="Garra" Grid.Column="0" Grid.Row="1"/>
+                            <Slider x:Name="SliderGarra" Value="{Binding ElementName=TextBoxGarra, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="10" Maximum="100" Grid.Row="1" Height="22" VerticalAlignment="Top"/>
                             <!--min: 10 max: 100-->
-                            <TextBox x:Name="TextBoxGarra" Text="{Binding ElementName=SliderGarra, Path=Value}" Grid.Column="2" Grid.Row="0"/>
+                            <TextBox x:Name="TextBoxGarra" Text="{Binding ElementName=SliderGarra, Path=Value}" Grid.Column="2" Grid.Row="1"/>
+                            <CheckBox HorizontalAlignment="Center" x:Name="CheckBoxGarra" Grid.Column="3" Grid.Row="1"/>
 
-                            <Label  Content="Pulso Sobe/Desce" Grid.Column="0" Grid.Row="1"/>
-                            <Slider x:Name="SliderPulsoSd" Value="{Binding ElementName=TextBoxPulsoSd, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="10" Maximum="150" Grid.Row="1"/>
-                            <TextBox x:Name="TextBoxPulsoSd" Text="{Binding ElementName=SliderPulsoSd, Path=Value}" Grid.Column="2" Grid.Row="1"/>
+                            <Label  Content="Pulso Sobe/Desce" Grid.Column="0" Grid.Row="2"/>
+                            <Slider x:Name="SliderPulsoSd" Value="{Binding ElementName=TextBoxPulsoSd, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="10" Maximum="150" Grid.Row="2"/>
+                            <TextBox x:Name="TextBoxPulsoSd" Text="{Binding ElementName=SliderPulsoSd, Path=Value}" Grid.Column="2" Grid.Row="2"/>
+                            <CheckBox HorizontalAlignment="Center" x:Name="CheckBoxPulsoSd" Grid.Column="3" Grid.Row="2"/>
 
-                            <Label  Content="Pulso Gira" Grid.Column="0" Grid.Row="2"/>
-                            <Slider x:Name="SliderPulsoGira" Value="{Binding ElementName=TextBoxPulso, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="10" Maximum="150" Grid.Row="2"/>
-                            <TextBox x:Name="TextBoxPulsoGira" Text="{Binding ElementName=SliderPulsoGira, Path=Value}" Grid.Column="2" Grid.Row="2"/>
+                            <Label  Content="Pulso Gira" Grid.Column="0" Grid.Row="3"/>
+                            <Slider x:Name="SliderPulsoGira" Value="{Binding ElementName=TextBoxPulso, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="10" Maximum="150" Grid.Row="3"/>
+                            <TextBox x:Name="TextBoxPulsoGira" Text="{Binding ElementName=SliderPulsoGira, Path=Value}" Grid.Column="2" Grid.Row="3"/>
+                            <CheckBox HorizontalAlignment="Center" x:Name="CheckBoxPulsoGrira" Grid.Column="3" Grid.Row="3"/>
 
-                            <Label  Content="Cotovelo" Grid.Column="0" Grid.Row="3"/>
-                            <Slider x:Name="SliderCotovelo" Value="{Binding ElementName=TextBoxCotovelo, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="5" Maximum="170" Grid.Row="3"/>
-                            <TextBox x:Name="TextBoxCotovelo" Text="{Binding ElementName=SliderCotovelo, Path=Value}" Grid.Column="2" Grid.Row="3"/>
+                            <Label  Content="Cotovelo" Grid.Column="0" Grid.Row="4"/>
+                            <Slider x:Name="SliderCotovelo" Value="{Binding ElementName=TextBoxCotovelo, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="5" Maximum="170" Grid.Row="4"/>
+                            <TextBox x:Name="TextBoxCotovelo" Text="{Binding ElementName=SliderCotovelo, Path=Value}" Grid.Column="2" Grid.Row="4"/>
+                            <CheckBox HorizontalAlignment="Center" x:Name="CheckBoxCotovelo" Grid.Column="3" Grid.Row="4"/>
 
                             <Label  Content="Ombro" Grid.Column="0" Grid.Row="4"/>
-                            <Slider x:Name="SliderOmbro" Value="{Binding ElementName=TextBoxOmbro, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="50" Maximum="140" Grid.Row="4"/>
-                            <TextBox x:Name="TextBoxOmbro" Text="{Binding ElementName=SliderOmbro, Path=Value}" Grid.Column="2" Grid.Row="4"/>
+                            <Slider x:Name="SliderOmbro" Value="{Binding ElementName=TextBoxOmbro, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="50" Maximum="140" Grid.Row="5"/>
+                            <TextBox x:Name="TextBoxOmbro" Text="{Binding ElementName=SliderOmbro, Path=Value}" Grid.Column="2" Grid.Row="5"/>
+                            <CheckBox HorizontalAlignment="Center" x:Name="CheckBoxOmbro" Grid.Column="3" Grid.Row="5"/>
 
                             <Label  Content="Cintura" Grid.Column="0" Grid.Row="5"/>
-                            <Slider x:Name="SliderCintura" Value="{Binding ElementName=TextBoxCintura, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="80" Maximum="150" Grid.Row="5"/>
-                            <TextBox x:Name="TextBoxCintura" Text="{Binding ElementName=SliderCintura, Path=Value}" Grid.Column="2" Grid.Row="5"/>
+                            <Slider x:Name="SliderCintura" Value="{Binding ElementName=TextBoxCintura, Path=Text}" Grid.Column="1" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="80" Maximum="150" Grid.Row="6"/>
+                            <TextBox x:Name="TextBoxCintura" Text="{Binding ElementName=SliderCintura, Path=Value}" Grid.Column="2" Grid.Row="6"/>
+                            <CheckBox HorizontalAlignment="Center" x:Name="CheckBoxCintura" Grid.Column="3" Grid.Row="6"/>
 
                         </Grid>
 

@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
+using System.Threading.Tasks;
 
 namespace BluetoothControl {
     public partial class MainWindow : Window {
@@ -53,13 +54,50 @@ namespace BluetoothControl {
         }
 
         private void btnSearchDevice_Click( object sender, RoutedEventArgs e ) {
-            lblStatus.Text = "Searching for devices...";
-            btnSearchDevice.IsEnabled = false;
-            BackgroundWorker bwDiscoverDevices = new BackgroundWorker();
-            bwDiscoverDevices.DoWork += new DoWorkEventHandler( bwDiscoverDevices_DoWork );
-            bwDiscoverDevices.RunWorkerCompleted += new RunWorkerCompletedEventHandler( bwDiscoverDevices_RunWorkerCompleted );
-            bwDiscoverDevices.RunWorkerAsync();
+            //lblStatus.Text = "Searching for devices...";
+            //btnSearchDevice.IsEnabled = false;
+            //BackgroundWorker bwDiscoverDevices = new BackgroundWorker();
+            //bwDiscoverDevices.DoWork += new DoWorkEventHandler( bwDiscoverDevices_DoWork );
+            //bwDiscoverDevices.RunWorkerCompleted += new RunWorkerCompletedEventHandler( bwDiscoverDevices_RunWorkerCompleted );
+            //bwDiscoverDevices.RunWorkerAsync();
+
+            bluetooth = new BluetoothClient();
+            SelecionarDispositivo j = new SelecionarDispositivo( bluetooth );
+            j.SeleciodadoDispositivoEvent += J_SeleciodadoDispositivoEvent;
+            j.ShowDialog();
         }
+
+        private void J_SeleciodadoDispositivoEvent( BluetoothDeviceInfo device ) {
+            lblStatus.Text = "Conectando...";
+            btnSearchDevice.IsEnabled = false;
+
+            Conectar( device );
+
+            //BackgroundWorker bwDiscoverDevices = new BackgroundWorker();
+            //bwDiscoverDevices.DoWork += new DoWorkEventHandler( bwDiscoverDevices_DoWork );
+            //bwDiscoverDevices.RunWorkerCompleted += new RunWorkerCompletedEventHandler( bwDiscoverDevices_RunWorkerCompleted );
+            //bwDiscoverDevices.RunWorkerAsync();
+        }
+
+        public async Task Conectar( BluetoothDeviceInfo device ) {
+            if( device != null ) {
+                bluetooth.SetPin( "1234" );
+                bluetooth.Connect( device.DeviceAddress, BluetoothService.SerialPort );
+                bluetoothStream = bluetooth.GetStream();
+
+                btnSearchDevice.IsEnabled = true;
+
+                Application.Current.Dispatcher.Invoke( new Action( () => {
+                    lblStatus.Text = $"Connected to {device.DeviceName}";
+                    btnSendMessage.IsEnabled = true;
+                } )
+                );
+            }
+            else {
+                Application.Current.Dispatcher.Invoke( new Action( () => { lblStatus.Text = "No device found"; } ) );
+            }
+        }
+
 
         private void bwDiscoverDevices_DoWork( object sender, DoWorkEventArgs e ) {
             try {
@@ -133,12 +171,12 @@ namespace BluetoothControl {
 
             }
             double[] sequencia = new double[] {
-                SliderGarra.Value,
-                SliderPulsoSd.Value,
-                SliderPulsoGira.Value,
-                SliderCotovelo.Value,
-                SliderOmbro.Value,
-                SliderCintura.Value,
+                (CheckBoxGarra.IsChecked ?? false) ? SliderGarra.Value : 0,
+                (CheckBoxPulsoSd.IsChecked ?? false) ? SliderPulsoSd.Value : 0,
+                (CheckBoxPulsoGrira.IsChecked ?? false) ? SliderPulsoGira.Value : 0,
+                (CheckBoxCotovelo.IsChecked ?? false) ? SliderCotovelo.Value : 0,
+                (CheckBoxOmbro.IsChecked ?? false) ? SliderOmbro.Value : 0,
+                (CheckBoxCintura.IsChecked ?? false) ? SliderCintura.Value : 0,
             };
 
             return new Sequencia { indice = index, numeros = sequencia, velocidade = vel };
@@ -217,6 +255,7 @@ namespace BluetoothControl {
             var item = ListaSequencia.SelectedItem as ItemListaSequencia;
             foreach( var x in item.Lista ) {
                 EnviarMensagem( x.FormatarSequencia() );
+                Thread.Sleep( 500 );
             }
         }
 
