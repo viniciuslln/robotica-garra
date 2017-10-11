@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace BluetoothControl {
     public partial class MainWindow {
@@ -10,9 +11,11 @@ namespace BluetoothControl {
             public string FormatarSequencia( ) {
                 string sequencia = "";
                 foreach( var item in this.numeros ) {
-                    sequencia += item != 0 ? (char) item : '0';
+                    Console.WriteLine( $"numero:   {item}" );
+                    sequencia += item != 0 ? (char) item : (char)0;
                 }
                 sequencia += velocidade;
+                Console.WriteLine( $"Sequencia:   {sequencia}" );
                 return sequencia;
             }
 

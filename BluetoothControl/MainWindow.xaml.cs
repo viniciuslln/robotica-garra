@@ -171,12 +171,12 @@ namespace BluetoothControl {
 
             }
             double[] sequencia = new double[] {
-                (CheckBoxGarra.IsChecked ?? false) ? SliderGarra.Value : 0,
-                (CheckBoxPulsoSd.IsChecked ?? false) ? SliderPulsoSd.Value : 0,
-                (CheckBoxPulsoGrira.IsChecked ?? false) ? SliderPulsoGira.Value : 0,
-                (CheckBoxCotovelo.IsChecked ?? false) ? SliderCotovelo.Value : 0,
-                (CheckBoxOmbro.IsChecked ?? false) ? SliderOmbro.Value : 0,
-                (CheckBoxCintura.IsChecked ?? false) ? SliderCintura.Value : 0,
+                !(CheckBoxCintura.IsChecked ?? false) ? SliderCintura.Value : 0,
+                !(CheckBoxPulsoGrira.IsChecked ?? false) ? SliderPulsoGira.Value : 0,
+                !(CheckBoxPulsoSd.IsChecked ?? false) ? SliderPulsoSd.Value : 0,
+                !(CheckBoxCotovelo.IsChecked ?? false) ? SliderCotovelo.Value : 0,
+                !(CheckBoxOmbro.IsChecked ?? false) ? SliderOmbro.Value : 0,
+                !(CheckBoxGarra.IsChecked ?? false) ? SliderGarra.Value : 0,
             };
 
             return new Sequencia { indice = index, numeros = sequencia, velocidade = vel };
@@ -253,10 +253,15 @@ namespace BluetoothControl {
 
         private void Button_Click_Executar_Sequencia( object sender, RoutedEventArgs e ) {
             var item = ListaSequencia.SelectedItem as ItemListaSequencia;
-            foreach( var x in item.Lista ) {
-                EnviarMensagem( x.FormatarSequencia() );
-                Thread.Sleep( 500 );
-            }
+            if( item == null ) return;
+            var g = string.Join( "", item.Lista.Select( a => a.FormatarSequencia() ) );
+            EnviarMensagem( g );
+
+            //foreach( var x in item.Lista ) {
+            //    EnviarMensagem( x.FormatarSequencia() );
+            //    Thread.Sleep( 500 );
+            //}
+
         }
 
         private void ListaItemsSequencia_SelectionChanged( object sender, SelectionChangedEventArgs e ) {
